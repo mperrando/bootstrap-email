@@ -215,7 +215,7 @@ module BootstrapEmail
       preview_node = @doc.at_css('preview')
       if preview_node.present?
         # apply spacing after the text max of 100 characters so it doesn't show body text
-        preview_node.content += "&nbsp;" * (100 - preview_node.content.length.to_i)
+        preview_node.content += "&nbsp;" * [100 - preview_node.content.length.to_i, 0].max
         node = template('div', {classes: 'preview', contents: preview_node.content})
         preview_node.remove
         return node
